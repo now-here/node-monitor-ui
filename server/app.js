@@ -12,7 +12,6 @@ var io = require('socket.io')(http);
 var debug = require('debug')('node-monitor-ui:app')
 
 app.use('/ui', express.static(path.resolve('node_modules/node-monitor-ui/ui')));
-app.use('/node_modules', express.static(path.resolve('node_modules/node-monitor-ui/node_modules')));
 
 io.on('connect', (socket) => {
   debug('Client Connected');
@@ -23,13 +22,12 @@ io.on('connect', (socket) => {
   })
 });
 
-
 app.get('/', (req, res)=> {
   debug('Req logger....');
-  res.sendFile(path.resolve('node_modules/node-monitor-ui/ui/index.html'));
-  //res.sendFile(path.resolve('ui/index.html'));
-});
 
+  var file = app.get('node-monitor-ui') || 'node_modules/node-monitor-ui/ui/index.html';
+  res.sendFile(path.resolve(file));
+});
 
 module.exports.server = http;
 module.exports.express = app;

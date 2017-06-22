@@ -9,10 +9,9 @@ var app = angular.module('myApp');
 /**
  * Socket Service
  */
-app.service('Socket', ['$window', 'db', function ($window, db) {
+app.service('Socket', ['$window', 'db', 'config', function ($window, db, config) {
 
-  var socket = $window.io.connect();
-
+  var socket = $window.io.connect(config.socket);
 
   socket.on('stat', (msg)=> {
     //console.info('Stat Received',msg);
@@ -33,7 +32,6 @@ app.service('Socket', ['$window', 'db', function ($window, db) {
       console.error('Error Occurred when adding logstream to db.',err,log);
     })
   });
-
 
   return socket;
 }]);
@@ -60,6 +58,6 @@ app.service('db', ['$window', function ($window) {
   return db;
 }]);
 
-app.service('google',['$window',function($window){
+app.service('google', ['$window', function($window) {
   return $window.google;
 }]);

@@ -2,3 +2,5 @@ node_modules
 node-monitor-ui.iml
 .idea
 *.log
+*.sublime-project
+*.sublime-workspace
