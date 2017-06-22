@@ -13,14 +13,13 @@ module.exports.express = express;
 module.exports.Hooks = hooks;
 
 module.exports.init = function (port = 3001) {
-
     server.listen(port, function (err) {
         if (err) throw err;
         debug(`Metrics Server Listening on port 0.0.0.0:${port}`);
         metrics.init();
     });
-
 };
 
-
-
+module.exports.shutdown = function () {
+    server.close();
+};
