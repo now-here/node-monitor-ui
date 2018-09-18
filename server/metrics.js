@@ -5,7 +5,7 @@
 
 'use strict';
 
-const pusage = require('pidusage');
+const pidusage = require('pidusage');
 const profiler = require('gc-profiler');
 const io = require('./app').io;
 const shortId = require('shortid');
@@ -59,7 +59,7 @@ class Metrics {
   }
 
   getCPU(done) {
-    pusage.stat(process.pid, (err, stat) => {
+    pidusage(process.pid, (err, stat) => {
       if (done) return done(err, stat.cpu);
     })
   }
